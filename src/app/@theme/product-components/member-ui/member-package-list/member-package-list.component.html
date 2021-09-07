@@ -1,0 +1,55 @@
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="float-right">
+                <button class="btn btn-sm btn-primary" status="primary" (click)="manageMemberPackage()">
+                    <fa-icon icon="plus"></fa-icon> Add Package
+                </button>
+
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-12" *ngFor="let memberPackage of memberPackageListDataSource">
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{memberPackage.packageName}}</h5>
+
+                        <div class="row">
+                            <div class="col-2">
+                                <small>Expires</small>
+                                <p>{{memberPackage.expiryDate | date: 'dd/MM/yyyy'}}</p>
+                            </div>
+                            <div class="col-3">
+                                <small>Limit</small>
+                                <p>{{memberPackage.packageCountLimitString}}</p>
+                            </div>
+                            <div class="col-2">
+                                <small>Status</small>
+                                <p>
+                                    <span class="badge badge-success" *ngIf="memberPackage.memberPackageState == 0">Active</span>
+                                    <span class="badge badge-danger" *ngIf="memberPackage.memberPackageState == 1">In Active</span>
+                                </p>
+
+                            </div>
+                            <div class="col-2">
+                                <small>Rate</small>
+                                <p>{{memberPackage.monthlyRateString}}</p>
+                            </div>
+                            <div class="col-3">
+                                <small>Method</small>
+                                <p>{{memberPackage.defaultPaymentMethodString}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-primary  float-right" [routerLink]="['/pages/member/member-package-details']" [queryParams]="{id: memberPackage.memberPackageId}">View</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>

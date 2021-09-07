@@ -1,0 +1,9 @@
+<div leaflet class="map"
+     [leafletOptions]="options"
+     [leafletLayers]="markers"
+     [(leafletCenter)]="mapLatLng"
+      [(leafletZoom)]="zoom"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletMapMoveEnd)="handleMapMoveEnd($event)"
+     (leafletMapZoomEnd)="handleMapZoomEnd($event)">
+</div>

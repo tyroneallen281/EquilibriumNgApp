@@ -1,0 +1,13 @@
+<dx-select-box [dataSource]="packageModels"
+               displayExpr="name"
+               valueExpr="packageId"
+               [(ngModel)]="packageId"
+               itemTemplate="item"
+               (ngModelChange)="updatePackage()">
+    <div *dxTemplate="let data of 'item'">
+        <div style="display:inline-block">
+            <p>{{data.name}} ({{data.priceString}})</p>
+            <small>Months: {{data.minimumMonths}} -  {{data.limitTypeString}}</small>
+        </div>
+    </div>
+</dx-select-box>

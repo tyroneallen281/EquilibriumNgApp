@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="modal-title">Send Notification</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+        <div class="form-group" *ngIf="registrationIds != null && registrationIds.length > 0">
+            Number of notifcations to Registrations: {{registrationIds.length}}
+        </div>
+        <div class="form-group" *ngIf="individualIds != null && individualIds.length > 0">
+            Number of notifcations to Participants: {{individualIds.length}}
+        </div>
+        <div class="form-group">
+            <label for="inputNotificationType" class="col-form-label">Notification Type</label>
+            <select name="inputNotificationType" placeholder="Select" class="form-control" [(ngModel)]="sendNotificationModel.notificationType">
+                <option value="0">Push Notification</option>
+                <option value="1">SMS</option>
+                <option value="2">Email</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="sendNotificationModel.notificationType == 2">
+            <div>
+                <label for="inputSubject" class="form-label">Subject</label>
+                <div>
+                    <input type="text" name="inputSubject" class="form-control" id="inputSubject" placeholder="Subject" [(ngModel)]="sendNotificationModel.subject" autocomplete="off" required />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputBox" class="col-form-label">Message</label>
+            <div class="">
+                <textarea type="text" name="inputMessage" class="form-control" id="inputMessage" placeholder="Message" [(ngModel)]="sendNotificationModel.message" required *ngIf="sendNotificationModel.notificationType != 2">
+                </textarea>
+                <quill-editor name="inputMessage" [(ngModel)]="sendNotificationModel.message" required *ngIf="sendNotificationModel.notificationType == 2">
+                </quill-editor>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+        <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+            Send
+        </button>
+    </div>
+</form>

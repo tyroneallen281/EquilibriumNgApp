@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label for="inputName" class="form-label">Name</label>
+            <input type="text" name="inputName" class="form-control" id="inputName" placeholder="Package Name" [(ngModel)]="packageModel.name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="inputName" class="form-label">Description</label>
+            <textarea type="text" name="inputDescription" class="form-control" id="inputDescription" placeholder="Description" [(ngModel)]="packageModel.description" required>
+                </textarea>
+        </div>
+
+        <div class="form-group ">
+            <label for="inputName" class="form-label">Price</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">R</span>
+                </div>
+                <input type="number" name="inputPrice" class="form-control" id="inputPrice" placeholder="Price" [(ngModel)]="packageModel.price" required />
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="inputLimitType" class="form-label">Package Type</label>
+            <small>(Booking limit applys monthly or over the full package)</small>
+            <select name="inputLimitType" placeholder="Select" class="form-control" [(ngModel)]="packageModel.limitType" required>
+                <option value="0">Month to month</option>
+                <option value="1">Full period</option>
+            </select>
+        </div>
+
+        <div class="form-group ">
+            <label for="inputMinimumMonths" class="form-label">Contract Length </label>
+            <small>(After this period a contract can be requested to be canceled by the user.)</small>
+            <select name="inputMinimumMonths" placeholder="Select" class="form-control" [(ngModel)]="packageModel.minimumMonths" required>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+                <option value="8">8 Months</option>
+                <option value="12">12 Months</option>
+                <option value="24">24 Months</option>
+            </select>
+        </div>
+
+        <div class="form-group ">
+            <label for="inputName" class="form-label">Booking Limit</label>
+            <div class="input-group">
+
+                <input type="number" name="inputClassLimit" class="form-control" id="inputClassLimit" placeholder="Bookings" [(ngModel)]="packageModel.classLimit" required />
+                <div class="input-group-append">
+                    <span class="input-group-text" *ngIf="packageModel.limitType == 0">per month</span>
+                    <span class="input-group-text" *ngIf="packageModel.limitType == 1">full period</span>
+                </div>
+            </div>
+        </div>
+       
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+        <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+            Save
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+<div class="row mb-2">
+  <div class="col-xl-12">
+    <div class="float-left">
+        <h3>Package - {{packageModel.name}}</h3>
+    </div>
+    <div class="float-right">
+
+        <button class="btn btn-sm btn-danger" status="primary" (click)="deletePackage()">
+            <fa-icon icon="trash"></fa-icon> Delete
+        </button>
+        <button class="btn btn-sm btn-primary" status="primary" (click)="managePackage()">
+            <fa-icon icon="pencil-alt"></fa-icon> Edit
+        </button>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+
+  <div class="col-xl-12">
+    <nb-card>
+      <nb-card-body>
+        <nb-tabset>
+
+            <nb-tab tabTitle="Members">
+                <ngx-member-list [packageId]="id"></ngx-member-list>
+           </nb-tab>
+      
+        </nb-tabset>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

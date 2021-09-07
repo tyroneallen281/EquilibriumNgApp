@@ -1,0 +1,11 @@
+
+<ng-select [items]="staffModels"
+           [multiple]="true"
+           [closeOnSelect]="false"
+           [searchable]="false"
+           bindLabel="fullName"
+           bindValue="staffId"
+           placeholder="Select Trainers"
+           [(ngModel)]="staff"
+           (ngModelChange)="updateStaff()">
+</ng-select>

@@ -1,0 +1,109 @@
+<div class="row mb-2">
+    <div class="col-xl-12">
+        <div class="float-left">
+            <h3>Member - {{memberModel.fullName}}</h3>
+        </div>
+        <div class="float-right">
+
+            <button class="btn btn-sm btn-danger" status="primary" (click)="deleteMember()">
+                <fa-icon icon="trash"></fa-icon> Delete
+            </button>
+            <button class="btn btn-sm btn-primary" status="primary" (click)="manageMember()">
+                <fa-icon icon="pencil-alt"></fa-icon> Edit
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3">
+        <nb-card>
+            <nb-card-header>
+                <h4>Details</h4>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="mt-2">
+                    Email
+                    <p>
+                        <strong>
+                            {{memberModel.email}}
+                        </strong>
+                    </p>
+                </div>
+                <div class="mt-2">
+                    Contact Number
+                    <p>
+                        <strong>
+                            +27 {{memberModel.contactNumber}}
+                        </strong>
+                    </p>
+                </div>
+                <div class="mt-2">
+                    Date of Birth
+                    <p>
+                        <strong>
+                            {{memberModel.dateOfBirth | date: 'dd/MM/yyyy'}}
+                        </strong>
+                    </p>
+                </div>
+                <div class="mt-2">
+                    Gender
+                    <p>
+                        <strong *ngIf="memberModel.gender == 1">
+                            Male
+                        </strong>
+                        <strong *ngIf="memberModel.gender == 2">
+                            Female
+                        </strong>
+                    </p>
+                </div>
+                <div class="mt-2">
+                    Equilibrium App
+                    <div>
+                        <div *ngIf="!memberModel.accountId">
+                            <strong>
+                                Needs App
+                                <button class="btn btn-sm btn-primary" status="primary" (click)="inviteApp()">
+                                    Invite
+                                </button>
+                            </strong>
+                        </div>
+
+                        <strong *ngIf="memberModel.accountId">
+                            Has App
+                        </strong>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    Notes
+                    <p>
+                        <small>
+                            {{memberModel.notes}}
+                        </small>
+                    </p>
+                </div>
+
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-xl-9">
+        <nb-card>
+            <nb-card-body>
+                <nb-tabset>
+                    <nb-tab tabTitle="Bookings">
+                        <ngx-booking-list [memberId]="id"></ngx-booking-list>
+                    </nb-tab>
+                    <nb-tab tabTitle="Packages">
+                        <ngx-member-package-list [memberId]="id" [facilityId]="memberModel.facilityId"></ngx-member-package-list>
+                    </nb-tab>
+                    <nb-tab tabTitle="Payment History">
+                        <ngx-payment-history-list [memberId]="id" ></ngx-payment-history-list>
+                    </nb-tab>
+                    <nb-tab tabTitle="Mandates">
+                        <ngx-mandate-list  [memberId]="id"  [facilityId]="memberModel.facilityId"></ngx-mandate-list>
+                    </nb-tab>
+                </nb-tabset>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

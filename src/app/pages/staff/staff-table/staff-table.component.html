@@ -1,0 +1,48 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Staff</h3>
+      </div>
+      <div class="col-6">
+        <div class="float-right">
+            <button class="btn btn-primary" size="small" type="button" nbButton status="primary" (click)="importMember()">
+                <img src="https://img.icons8.com/office/24/000000/xls-import.png" /> Import Staff Members
+            </button>
+             <button class="btn btn-primary" size="small" type="button" nbButton status="primary" (click)="createStaff()">
+                  <img src="https://img.icons8.com/dusk/24/000000/plus-math.png"> Create Staff Member
+              </button>
+
+        </div>
+      </div>
+    </div>
+</nb-card-header>
+
+  <nb-card-body>
+      <dx-data-grid [dataSource]="staffDataSource"
+                    [remoteOperations]="true"
+                    showBorders="true"
+                    showRowLines="true"
+                    rowAlternationEnabled="true"
+                    [(selectedRowKeys)]="selectedRows"
+                    (onToolbarPreparing)="onToolbarPreparing($event)">
+          <dxo-export [enabled]="true" fileName="Staff Members" [allowExportSelectedData]="false"></dxo-export>
+          <dxo-search-panel [visible]="true"
+                            [width]="240"
+                            placeholder="Search..."></dxo-search-panel>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="firstName" [width]="250"></dxi-column>
+          <dxi-column dataField="lastName" [width]="250"></dxi-column>
+          <dxi-column dataField="email"></dxi-column>
+          <dxi-column dataField="contactNumber" [width]="250"></dxi-column>
+          <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true"
+                     [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+          <div *dxTemplate="let data of 'actionTemplate'">
+              <a class="btn btn-primary  btn-block float-right" [routerLink]="['/pages/staff/staff-details']" [queryParams]="{id: data.data.staffId}">View</a>
+          </div>
+      </dx-data-grid>
+   
+  </nb-card-body>
+</nb-card>

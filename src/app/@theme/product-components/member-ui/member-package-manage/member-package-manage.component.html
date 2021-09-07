@@ -1,0 +1,94 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+        <div class="form-group">
+
+            <label for="inputPackage" class="col-form-label">Package</label>
+            <div>
+                <ngx-package-select [(packageId)]="memberPackageModel.packageId" [(facilityId)]="facilityId" (packageChange)="packageChanged($event)"></ngx-package-select>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div>
+                <nb-checkbox name="inputAutoRenew" [(ngModel)]="memberPackageModel.autoRenew">Auto renew after end date</nb-checkbox>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="!memberPackageModel.autoRenew">
+            <label for="inputexpiryDate" class="form-label">Expiry Date</label>
+            <input name="inputexpiryDate" [nbDatepicker]="expiryDate" class="form-control" [(ngModel)]="memberPackageModel.expiryDate" autocomplete="off">
+            <nb-datepicker #expiryDate></nb-datepicker>
+        </div>
+        <div class="form-group">
+
+            <label for="inputMonthlyRate" class="col-form-label">Rate</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">R</span>
+                </div>
+                <input type="number" name="inputMonthlyRate" class="form-control" id="inputMonthlyRate" placeholder="Rate" [(ngModel)]="memberPackageModel.monthlyRate" required />
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputStartDateSetting" class="form-label">Start Date</label>
+            <div>
+                <select name="inputStartDateSetting" placeholder="Select" class="form-control" required [(ngModel)]="memberPackageModel.startDateSetting">
+                    <option value="0">Start now</option>
+                    <option value="1">Next Calendar Month</option>
+                    <option value="2">Custom</option>
+                </select>
+            </div>
+            <small *ngIf="memberPackageModel.startDateSetting == 0">*Current month will be charged via NetCash PayNow unless Cash/External method chosen</small>
+        </div>
+        <div class="form-group" *ngIf="memberPackageModel.startDateSetting == 2">
+            <label for="inputstartdate" class="form-label">Start Date</label>
+            <input name="inputstartdate" [nbDatepicker]="startdate" class="form-control" [(ngModel)]="memberPackageModel.startdate" autocomplete="off">
+            <nb-datepicker #startdate></nb-datepicker>
+        </div>
+        <div class="form-group">
+            <div>
+                <nb-checkbox name="inputEndDateSetting" [(ngModel)]="memberPackageModel.customEndDate">Custom End Date</nb-checkbox>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="memberPackageModel.customEndDate">
+            <label for="inputenddate" class="form-label">End Date</label>
+            <input name="inputenddate" [nbDatepicker]="enddate" class="form-control" [(ngModel)]="memberPackageModel.enddate" autocomplete="off">
+            <nb-datepicker #enddate></nb-datepicker>
+        </div>
+        <hr />
+        <h3>Payment</h3>
+        <small></small>
+        <div class="form-group">
+            <label for="inputDefaultPaymentMethod" class="form-label">Payment Method(After first month)</label>
+            <div>
+                <select name="inputDefaultPaymentMethod" placeholder="Select" class="form-control" required [(ngModel)]="memberPackageModel.defaultPaymentMethod">
+                    <option value="1">NetCash Pay Now Invoice</option>
+                    <option value="2">Debit Order</option>
+                    <!--<option value="3">Credit Card Depit Order</option>-->
+                    <option value="4">Cash/External</option>
+                </select>
+            </div>
+        </div>
+        <div class="bankingDetails" *ngIf="memberPackageModel.defaultPaymentMethod == 2">
+            <ngx-mandate-select [(mandateId)]="memberPackageModel.mandateId" [(memberId)]="memberId"></ngx-mandate-select>
+            <small *ngIf="memberPackageModel.mandateId != 0">*A e-mandate email will be sent to member before debit order can be loaded..</small>
+        </div>
+
+    </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+            <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+                Save
+            </button>
+        </div>
+</form>

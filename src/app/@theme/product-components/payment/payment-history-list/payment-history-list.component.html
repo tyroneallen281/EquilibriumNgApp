@@ -1,0 +1,53 @@
+<dx-data-grid [dataSource]="paymentHistoryDataSource"
+              [remoteOperations]="true"
+              showBorders="true"
+              showRowLines="true"
+              rowAlternationEnabled="true"
+              [(selectedRowKeys)]="selectedRows"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-export [enabled]="true" fileName="Payment History" [allowExportSelectedData]="false"></dxo-export>
+    <dxo-search-panel [visible]="true"
+                      [width]="240"
+                      placeholder="Search..."></dxo-search-panel>
+    <dxo-selection mode="multiple" selectAllMode="false"></dxo-selection>
+    <dxi-column dataField="paymentDateTimeString" [width]="150" caption="Payment Date"></dxi-column>
+    <dxi-column dataField="paymentStatus" cellTemplate="statusTemplate"></dxi-column>
+    <dxi-column dataField="paymentMethod" cellTemplate="paymentMethodTemplate"></dxi-column>
+    <dxi-column dataField="amountString" caption="Amount"></dxi-column>
+    <dxi-column dataField="paymentReference"></dxi-column>
+    <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"
+               [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    <div *dxTemplate="let data of 'actionTemplate'">
+        <!--<a class="btn btn-primary  btn-block float-right" [routerLink]="['/pages/member/member-details']" [queryParams]="{id: data.data.memberId}">View</a>-->
+    </div>
+    <div *dxTemplate="let data of 'statusTemplate'">
+        <span *ngIf="data.data.paymentStatus == 0">
+            Pending
+        </span>
+        <span *ngIf="data.data.paymentStatus == 1">
+            Failed
+        </span>
+        <span *ngIf="data.data.paymentStatus == 2">
+            Success
+        </span>
+    </div>
+    <div *dxTemplate="let data of 'paymentMethodTemplate'">
+        <span *ngIf="data.data.paymentMethod == 0">
+            Pay Now
+        </span>
+        <span *ngIf="data.data.paymentMethod == 1">
+            Pay Now Invoice
+        </span>
+        <span *ngIf="data.data.paymentMethod == 2">
+            Debit Order
+        </span>
+        <span *ngIf="data.data.paymentMethod == 3">
+            Credit Card Debit Order
+        </span>
+        <span *ngIf="data.data.paymentMethod == 4">
+            Cash/External
+        </span>
+    </div>
+</dx-data-grid>

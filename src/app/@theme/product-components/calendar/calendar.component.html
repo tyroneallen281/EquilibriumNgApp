@@ -1,0 +1,53 @@
+<!--<ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" ></ng-fullcalendar>-->
+    <dx-scheduler [dataSource]="schedulerDataSource"
+                  [remoteFiltering]="true"
+                  [views]='[ "day","week","month"]'
+                  currentView="week"
+                  startDateExpr="start"
+                  endDateExpr="end"
+                  textExpr="title"
+                  [startDayHour]="5"
+                  [endDayHour]="23"
+                  [height]="700"
+                  appointmentTemplate="class-event-template"
+                  appointmentTooltipTemplate="class-event-tooltip-template"
+                  (onAppointmentDblClick)="addEventClick($event)"
+                  (onCellClick)="addCalendarClick($event)">
+        <dxo-editing [allowAdding]="false" [allowUpdating]="false"></dxo-editing>
+
+
+        <div *dxTemplate="let model of 'class-event-template'">
+            <div>
+                <span  class="badge badge-danger"  *ngIf="model.cancelled"><small>Cancelled</small></span>
+                <div class='class-event-preview'>
+
+                    <small>   <strong> {{model.title}}</strong> </small>
+                </div>
+                <div class='class-event-dates'>
+                    <small>{{(model.startDate | date:'shortTime') + ' - ' + (model.endDate | date:'shortTime')}}</small>
+                </div>
+                <div>
+                    <small> Space: <strong>{{model.classBookingsCount}}/{{model.capacity}}</strong></small>
+                </div>
+                <div class='class-event-trainer'>
+                    <small> Trainer:  <strong>{{model.mainTrainer}}</strong></small>
+                </div>
+            </div>
+        </div>
+        <div *dxTemplate="let model of 'class-event-tooltip-template'">
+            <div class='class-event-tooltip'>
+                <div class='class-event-preview'>
+                    <small>   <strong> {{model.title}}</strong> </small>
+                </div>
+                <div class='class-event-dates'>
+                    <small>{{(model.startDate | date:'shortTime') + ' - ' + (model.endDate | date:'shortTime')}}</small>
+                </div>
+                <div>
+                    <small>Space: <strong>{{model.classBookingsCount}}/{{model.capacity}}</strong></small>
+                </div>
+                <div class='class-event-trainer'>
+                    <a [routerLink]="['/pages/staff/staff-details']" [queryParams]="{id: model.mainTrainerId}">{{model.mainTrainer}}</a> 
+                </div>
+            </div>
+        </div>
+    </dx-scheduler>

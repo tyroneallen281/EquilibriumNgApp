@@ -1,0 +1,20 @@
+<div class="form-group" *ngIf="searchEnabled">
+    <label for="inputStartDateSetting" class="form-label">Search Address</label>
+    <div>
+        <dx-autocomplete placeholder="Type address to search on map"
+                         [dataSource]="dataSource"
+                         (onValueChanged)="updateMapPin($event)">>
+            <div *dxTemplate="let item of 'item'">
+                <span>{{item.displayName}}</span>
+            </div>
+        </dx-autocomplete>
+    </div>
+</div>
+
+<div leaflet
+     [leafletOptions]="options"
+     [leafletLayers]="markers"
+     [(leafletCenter)]="mapLatLng"
+     (leafletMapReady)="onMapReady($event)">
+
+</div>

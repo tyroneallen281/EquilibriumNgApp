@@ -1,0 +1,48 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Facilities</h3>
+      </div>
+      <div class="col-6">
+        <div class="float-right">
+          
+            <button class="btn btn-primary" size="small" type="button" nbButton status="primary" (click)="createFacility()">
+              <img src="https://img.icons8.com/dusk/24/000000/plus-math.png"> Create Facility
+            </button>
+
+        </div>
+      </div>
+    </div>
+</nb-card-header>
+
+  <nb-card-body>
+      <dx-data-grid [dataSource]="facilityDataSource"
+                    [remoteOperations]="true"
+                    showBorders="true"
+                    showRowLines="true"
+                    rowAlternationEnabled="true">
+          <dxo-export [enabled]="true" fileName="Facilities" [allowExportSelectedData]="false"></dxo-export>
+          <dxo-search-panel [visible]="true"
+                            [width]="240"
+                            placeholder="Search..."></dxo-search-panel>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="logoPath" [width]="60" caption="Logo"
+                      [allowSorting]="false" cellTemplate="logoTemplate"></dxi-column>
+          <dxi-column dataField="name" [width]="250"></dxi-column>
+          <dxi-column dataField="contact" [width]="250"></dxi-column>
+          <dxi-column dataField="address"></dxi-column>
+          <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true"
+                     [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+          <div *dxTemplate="let data of 'logoTemplate'">
+              <img class="thumbnail mx-auto" width="40" height="40" [src]="data.value" src-fallback="http://app.baobabtech.co.za/BaobabDMapi/api/Apps/Icon?filename=no_icon" />
+          </div>
+          <div *dxTemplate="let data of 'actionTemplate'">
+              <a class="btn btn-primary  btn-block float-right"  [routerLink]="['/pages/facility/facility-details']" [queryParams]="{id: data.data.facilityId}">View</a>
+          </div>
+      </dx-data-grid>
+   
+  </nb-card-body>
+</nb-card>

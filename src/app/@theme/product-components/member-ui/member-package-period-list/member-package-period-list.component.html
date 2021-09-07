@@ -1,0 +1,27 @@
+<dx-data-grid [dataSource]="memberPackageListDataSource"
+              [remoteOperations]="true"
+              showBorders="true"
+              showRowLines="true"
+              rowAlternationEnabled="true"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-export [enabled]="true" fileName="MembersPackagePeriods" [allowExportSelectedData]="false"></dxo-export>
+
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="startDate" dataType="date"></dxi-column>
+    <dxi-column dataField="endDate" dataType="date"></dxi-column>
+    <dxi-column dataField="classUsed" caption="Bookings"></dxi-column>
+    <dxi-column dataField="classLimit" caption="Limit" [width]="60"></dxi-column>
+    <dxi-column dataField="defaultPaymentMethodString" caption="Payment Method" [width]="80"></dxi-column>
+    <dxi-column dataField="paymentHistory.paymentStatus" caption="Payment" [width]="80" cellTemplate="paymentTemplate"></dxi-column>
+    <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"
+               [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    <div *dxTemplate="let data of 'paymentTemplate'">
+        <ngx-payment-status-ui [paymentStatus]="data.value"></ngx-payment-status-ui>
+    </div>
+    <div *dxTemplate="let data of 'actionTemplate'">
+        <button class="btn btn-primary  btn-block float-right" (click)="managePeriod(data.data.memberPackagePeriodId)">Edit</button>
+        <button class="btn btn-primary  btn-block float-right" (click)="managePaymentHistory(data.data.paymentHistoryId)">Payment</button>
+    </div>
+</dx-data-grid>

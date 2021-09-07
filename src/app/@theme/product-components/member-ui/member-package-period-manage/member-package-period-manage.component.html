@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+
+        <div class="form-group ">
+            <label for="inputName" class="form-label">Booking Limit</label>
+            <div class="input-group">
+
+                <input type="number" name="inputClassLimit" class="form-control" id="inputClassLimit" placeholder="Price" [(ngModel)]="memberPackagePeriodModel.classLimit" required />
+                <div class="input-group-postpend">
+                    <span class="input-group-text">per month</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+        <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+            Save
+        </button>
+    </div>
+</form>

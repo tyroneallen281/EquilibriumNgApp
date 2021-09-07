@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-12 mb-3">
+        <span class="dashboard-header">Dashboard</span>
+        <button class="btn btn-success float-right" (click)="refreshDashboard()">Refresh</button>
+        <input class="form-control float-right w-25" nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" (ngModelChange)="dateRangeChange($event)" [ngModel]="dateRange">
+        <nb-rangepicker #formpicker></nb-rangepicker>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <nb-card>
+            <nb-card-header>
+                <span>
+                    Your Agenda
+                </span>
+            </nb-card-header>
+            <nb-card-body>
+                <ngx-staff-agenda-element [facilityId]="filterDashboardModel.facilityId"></ngx-staff-agenda-element>
+            </nb-card-body>
+        </nb-card>
+       
+    </div>
+    <div class="col-sm-6 col-md-8">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Bookings
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.bookingsCount}}</span><b>/{{dashboardModel.classEventSpacesCount}} spaces</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Bookings Made
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.bookingsMadeCount}}</span></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Arrivals
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.checkedInBookingsCount}}</span><b>/{{dashboardModel.bookingsCount}} bookings</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Package Bookings
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.packageBookingsCount}}</span><b>/{{dashboardModel.bookingsCount}} bookings</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Drop In Bookings
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.dropInBookingsCount}}</span><b>/{{dashboardModel.bookingsCount}} bookings</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Active Members
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.activeMembersCount}}</span><b>/{{dashboardModel.membersCount}} members</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            Member With App
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <p><span class="dashboard-large-number">{{dashboardModel.membersHasAppCount}}</span><b>/{{dashboardModel.membersCount}} members</b></p>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+</div>

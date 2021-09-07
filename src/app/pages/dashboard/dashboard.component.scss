@@ -1,0 +1,28 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+
+
+  @include media-breakpoint-down(is) {
+    /deep/ nb-card.large-card {
+      height: nb-theme(card-height-medium);
+    }
+  }
+
+.left-border{
+  border-left: 1px solid #808080;
+}
+
+dash-height {
+  min-height: 600px;
+}
+.dashboard-header {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.dashboard-large-number {
+    font-weight:bold;
+    font-size:x-large;
+}

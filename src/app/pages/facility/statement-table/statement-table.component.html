@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Daily NetCash Statements</h3>
+      </div>
+      <div class="col-6">
+        
+      </div>
+    </div>
+</nb-card-header>
+
+  <nb-card-body>
+      <dx-data-grid [dataSource]="statementDataSource"
+                    [remoteOperations]="true"
+                    showBorders="true"
+                    showRowLines="true"
+                    rowAlternationEnabled="true"
+                    (onToolbarPreparing)="onToolbarPreparing($event)">
+          <dxo-export [enabled]="true" fileName="Statements" [allowExportSelectedData]="false"></dxo-export>
+          <dxi-column dataField="applicableDateTime" dataType="date" [width]="150" caption="Statement Date"></dxi-column>
+          <dxi-column dataField="requested" [width]="100"></dxi-column>
+          <dxi-column dataField="recieved" [width]="100"></dxi-column>
+          <dxi-column dataField="resultMessage" caption="Status"></dxi-column>
+          <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true"
+                     [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+
+          <div *dxTemplate="let data of 'actionTemplate'">
+              <a class="btn btn-primary  btn-block float-right" [href]="data.data.rawFilePath | safe" *ngIf="data.data.recieved" >Download</a>
+          </div>
+      </dx-data-grid>
+   
+  </nb-card-body>
+</nb-card>

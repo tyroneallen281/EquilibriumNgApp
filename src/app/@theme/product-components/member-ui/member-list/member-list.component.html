@@ -1,0 +1,33 @@
+<dx-data-grid [dataSource]="memberDataSource"
+              [remoteOperations]="true"
+              showBorders="true"
+              showRowLines="true"
+              rowAlternationEnabled="true"
+              [(selectedRowKeys)]="selectedRows"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-export [enabled]="true" fileName="Members" [allowExportSelectedData]="false"></dxo-export>
+    <dxo-search-panel [visible]="true"
+                      [width]="240"
+                      placeholder="Search..."></dxo-search-panel>
+    <dxo-selection mode="multiple" selectAllMode="false"></dxo-selection>
+    <dxi-column dataField="firstName"></dxi-column>
+    <dxi-column dataField="lastName"></dxi-column>
+    <dxi-column caption="Gender" [allowSorting]="false" [width]="80" cellTemplate="genderTemplate"></dxi-column>
+    <dxi-column dataField="email"></dxi-column>
+    <dxi-column dataField="fullContactNumber" [width]="150" caption="Contact Number"></dxi-column>
+    <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"
+               [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    <div *dxTemplate="let data of 'actionTemplate'">
+        <a class="btn btn-primary  btn-block float-right" [routerLink]="['/pages/member/member-details']" [queryParams]="{id: data.data.memberId}">View</a>
+    </div>
+    <div *dxTemplate="let data of 'genderTemplate'">
+        <span *ngIf="data.data.gender == 1">
+            Male
+        </span>
+        <span *ngIf="data.data.gender == 2">
+            Female
+        </span>
+    </div>
+</dx-data-grid>

@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="inputEmailType" class="col-form-label">Email Type</label>
+            <select name="inputEmailType" placeholder="Select" class="form-control" required [(ngModel)]="facilityAutoEmailModel.emailType">
+                <option value="0">Welcome</option>
+                <option value="1">Birthday</option>
+                <option value="2">Booking Confirmation</option>
+                <option value="3">Booking Cancelation</option>
+                <option value="4">Booking Reminder</option>
+                <option value="5">New Contract</option>
+                <option value="6">Contract Expiry</option>
+                <option value="7">General Notice</option>
+                <option value="8">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputEmailTemplateId" class="col-form-label">Email Template</label>
+            <select name="inputEmailTemplateId" placeholder="Select" class="form-control" required [(ngModel)]="facilityAutoEmailModel.emailTemplateId">
+                <option *ngFor="let facilityEmailTemplate of facilityEmailTemplateList" value="{{facilityEmailTemplate.emailTemplateId}}">{{facilityEmailTemplate.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+        <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+            Save
+        </button>
+    </div>
+</form>

@@ -1,0 +1,57 @@
+<div class="card card-body" *ngIf="paymentHistoryModel != null">
+    <h5>Payment</h5>
+
+    <hr />
+    <div class="row">
+        <div class="col">
+            <b>Payment Status</b>
+        </div>
+        <div class="col-9">
+            <p *ngIf="paymentHistoryModel.paymentStatus == 0">Pending</p>
+            <p *ngIf="paymentHistoryModel.paymentStatus == 1">Failed</p>
+            <p *ngIf="paymentHistoryModel.paymentStatus == 2">Paid</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Amount</b>
+        </div>
+        <div class="col-9">
+            <p>{{paymentHistoryModel.paymentAmount}}</p>
+            
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Reference</b>
+        </div>
+        <div class="col-9">
+            <p>{{paymentHistoryModel.paymentReference}}</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Request Trace(Sage)</b>
+        </div>
+        <div class="col-9">
+            <p>{{paymentHistoryModel.requestTrace}}</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Method</b>
+        </div>
+        <div class="col-9">
+            <p>{{paymentHistoryModel.method}}</p>
+        </div>
+
+    </div>
+    <hr />
+    <button class="btn btn-primary" (click)="managePaymentHistory()">
+        <fa-icon icon="pencil-alt"></fa-icon> Edit
+    </button>
+</div>

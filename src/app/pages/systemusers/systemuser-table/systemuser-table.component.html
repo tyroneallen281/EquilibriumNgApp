@@ -1,0 +1,52 @@
+
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Users</h3>
+      </div>
+      <div class="col-6">
+
+        <div class="float-right">
+          <button class="btn btn-primary" size="small" type="button" nbButton status="primary" (click)="createUser()">
+            <img src="https://img.icons8.com/dusk/24/000000/plus-math.png"> Create User
+          </button>
+
+         
+        </div>
+      </div>
+      </div>
+
+</nb-card-header>
+
+  <nb-card-body>
+
+
+    <dx-data-grid [dataSource]="lookupDataSource"
+                  [remoteOperations]="false"
+                    showBorders="true"
+                  showRowLines="true"
+                  rowAlternationEnabled="true"
+                    [hoverStateEnabled]="true"
+                  (onSelectionChanged)="rowSelected()"
+                  [(selectedRowKeys)]="selectedRows">
+      <dxo-export [enabled]="true" fileName="Sites" [allowExportSelectedData]="false"></dxo-export>
+      <dxo-search-panel [visible]="true"
+                        [width]="240"
+                        placeholder="Search..."></dxo-search-panel>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxi-column dataField="email" [width]="250"></dxi-column>
+      <dxi-column dataField="firstName"></dxi-column>
+      <dxi-column dataField="lastName"></dxi-column>
+      <dxi-column dataField="employeeNumber"></dxi-column>
+      <dxi-column dataField="idNumber"></dxi-column>
+      <dxi-column dataField="phoneNumber"></dxi-column>
+      <dxi-column dataField="lastLoginDate"  dataType="date"></dxi-column>
+
+      <dxo-paging [pageSize]="20"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true"
+                 [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    </dx-data-grid>
+
+  </nb-card-body>
+</nb-card>

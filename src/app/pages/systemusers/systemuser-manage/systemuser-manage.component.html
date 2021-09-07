@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form #f="ngForm" (ngSubmit)="formSubmit()">
+  <div class="modal-body">
+
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">First Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="firstName" class="form-control" id="inputfirstName" placeholder="First Name" [(ngModel)]="userModel.firstName" required />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="lastname" class="form-control" id="inputlastname" placeholder="Last Name" [(ngModel)]="userModel.lastName" required />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="text" name="phoneNumber" class="form-control" id="inputphoneNumber" placeholder="Phone Number" [(ngModel)]="userModel.phoneNumber" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">ID Number</label>
+      <div class="col-sm-10">
+        <input type="text" name="idNumber" class="form-control" id="inputidNumber" placeholder="ID Number" [(ngModel)]="userModel.idNumber" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">Employee Number</label>
+      <div class="col-sm-10">
+        <input type="text" name="employeeNumber" class="form-control" id="inputemployeeNumber" placeholder="Employee Number" [(ngModel)]="userModel.employeeNumber" />
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    <button type="submit" nbButton status="primary" [disabled]="f.invalid" >Save</button>
+  </div>
+</form>

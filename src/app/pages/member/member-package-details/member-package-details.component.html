@@ -1,0 +1,82 @@
+<div class="row mb-2">
+    <div class="col-xl-12">
+        <div class="float-left">
+            <h3>Member Package - <a [routerLink]="['/pages/member/member-details']" [queryParams]="{id: memberPackageModel.memberId}">{{memberPackageModel.memberName}}</a></h3>
+        </div>
+        <div class="float-right">
+
+            <button class="btn btn-sm btn-danger" status="primary" (click)="deleteMemberPackage()">
+                <fa-icon icon="trash"></fa-icon> Delete
+            </button>
+            <button class="btn btn-sm btn-danger" status="primary" (click)="cancelMemberPackage()" *ngIf="memberPackageModel.memberPackageState == 0">
+                <fa-icon icon="ban"></fa-icon> Cancel
+            </button>
+            <button class="btn btn-sm btn-success" status="success" (click)="activateMemberPackage()" *ngIf="memberPackageModel.memberPackageState == 1">
+                <fa-icon icon="ban"></fa-icon> Activate
+            </button>
+            <button class="btn btn-sm btn-primary" status="primary" (click)="manageMemberPackage()">
+                <fa-icon icon="pencil-alt"></fa-icon> Edit
+            </button>
+        </div>
+       
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-3">
+        <nb-card>
+            <nb-card-header>
+                Details
+            </nb-card-header>
+            <nb-card-body>
+                <div class="mt-2">
+                    Package
+                    <strong>
+                        <a [routerLink]="['/pages/package/package-details']" [queryParams]="{id: memberPackageModel.packageId}">{{memberPackageModel.packageName}}</a>
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Limit
+                    <strong>
+                        {{memberPackageModel.packageCountLimitString}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Auto Renew
+                    <strong>
+                        <span *ngIf="memberPackageModel.autoRenew">
+                            Yes
+                        </span>
+                        <span *ngIf="!memberPackageModel.autoRenew">
+                            No
+                        </span>
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Expiry
+                    <strong>
+                        {{memberPackageModel.expiryDate | date: 'dd/MM/yyyy'}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Status
+                    <span class="badge badge-success" *ngIf="memberPackageModel.memberPackageState == 0">Active</span>
+                    <span class="badge badge-danger" *ngIf="memberPackageModel.memberPackageState == 1">In Active</span>
+                </div>
+
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-xl-9">
+        <nb-card>
+            <nb-card-header>
+                Package Periods
+            </nb-card-header>
+            <nb-card-body>
+                <ngx-member-package-period-list [memberPackageId]="id"></ngx-member-package-period-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

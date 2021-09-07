@@ -1,0 +1,11 @@
+<ng-select [items]="classModels"
+           [multiple]="true"
+           [closeOnSelect]="false"
+           [searchable]="false"
+           bindLabel="name"
+           groupBy="facilityName"
+           bindValue="classId"
+           placeholder="Select Classes"
+           [(ngModel)]="class"
+           (ngModelChange)="updateClass()">
+</ng-select>

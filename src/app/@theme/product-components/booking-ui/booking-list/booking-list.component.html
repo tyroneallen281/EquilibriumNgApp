@@ -1,0 +1,30 @@
+
+    <dx-data-grid [dataSource]="dataSource"
+                  [remoteOperations]="true"
+                  showBorders="true"
+                  showRowLines="true"
+                  rowAlternationEnabled="true"
+                  [(selectedRowKeys)]="selectedRows"
+                  (onToolbarPreparing)="onToolbarPreparing($event)">
+        <dxo-export [enabled]="true" fileName="Bookings" [allowExportSelectedData]="false"></dxo-export>
+        <dxo-search-panel [visible]="true"
+                          [width]="240"
+                          placeholder="Search..."></dxo-search-panel>
+        <dxo-selection mode="multiple" selectAllMode="false"></dxo-selection>
+        <dxi-column dataField="classEventDateName" caption="Class" *ngIf="memberId != null"></dxi-column>
+        <dxi-column dataField="memberName" *ngIf="classEventId != null"></dxi-column>
+        <dxi-column dataField="bookingDateTime" dataType="datetime" [width]="150"></dxi-column>
+        <dxi-column dataField="bookingStateString" caption="Status" [width]="80"></dxi-column>
+        <dxi-column dataField="usedPackage" caption="Used Package" [width]="100"></dxi-column>
+        <dxi-column dataField="questionnaireDone" caption="Questionnaire Done" [width]="60"></dxi-column>
+        <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+        <dxo-paging [pageSize]="20"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true"
+                   [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+        <div *dxTemplate="let data of 'actionTemplate'">
+            <button class="btn btn-primary  btn-block float-right" (click)="checkIn(data.data.classBookingId)" *ngIf="data.data.checkedIn == 0">Check-In</button>
+            <button class="btn btn-primary  btn-block float-right" (click)="questionnaire(data.data.classBookingId)">COVID-19</button>
+            <button class="btn btn-danger  btn-block float-right" (click)="cancelBooking(data.data.classBookingId)" *ngIf="!data.data.cancelled">Cancel</button>
+        </div>
+    </dx-data-grid>
+

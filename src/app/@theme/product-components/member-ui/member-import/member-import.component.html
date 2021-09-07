@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title">Import Members</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+        <div class="form-group">
+            <div>
+                <label for="inputImport" class="form-label">Import File(xlsx) - Max 2 Mb</label>
+                <div>
+                    <input type="file" (change)="onFileChange($event)" multiple="false" required/>
+                </div>
+            </div>
+        </div>
+      
+
+    </div>
+    <div class="modal-footer">
+        <a href="https://equilibrium.blob.core.windows.net/files/ImportTemplate.xlsx" class="btn btn-secondary float-left" target="_blank">Template</a>
+        <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+        <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise" *ngIf="activeFile">
+            Import
+        </button>
+    </div>
+</form>

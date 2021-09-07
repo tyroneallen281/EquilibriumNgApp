@@ -1,0 +1,26 @@
+<div class="header-container"
+     [class.left]="position === 'normal'"
+     [class.right]="position === 'inverse'">
+    <div class="logo-containter">
+        <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+        <div class="logo" (click)="goToHome()">
+            <h5>Equilibrium</h5>
+       </div>
+    </div>
+    <ngx-facility-select-header></ngx-facility-select-header>
+ 
+</div>
+
+<div class="header-container">
+    <nb-actions size="medium" fullWidth
+                [class.right]="position === 'normal'"
+                [class.left]="position === 'inverse'">
+        <nb-action class="control-item" [nbContextMenu]="tenantMenu" nbContextMenuTag="tenantMenuContext">
+            <img src="https://img.icons8.com/dusk/24/000000/organization.png">
+        </nb-action>
+        <nb-action>
+            <nb-user [nbContextMenu]="userMenu" [name]="user?.unique_name" [picture]="user?.picture" nbContextMenuTag="userMenuContext"></nb-user>
+        </nb-action>
+
+    </nb-actions>
+</div>

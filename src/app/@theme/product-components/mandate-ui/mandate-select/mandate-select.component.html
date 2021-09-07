@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for="inputMandate" class="col-form-label">Mandate</label>
+    <select name="inputMandate" placeholder="Select" class="form-control" required [(ngModel)]="mandateId" (change)="updateMandate()">
+        <option value="0">New Electronic Mandate</option>
+        <option *ngFor="let mandateModel of mandateModels" value="{{mandateModel.mandateId}}">{{mandateModel.mandateName}}</option>
+    </select>
+</div>

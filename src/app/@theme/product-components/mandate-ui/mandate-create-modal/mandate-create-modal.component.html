@@ -1,0 +1,82 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create Mandate</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form  #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label for="inputClassState" class="form-label">Mandate Type</label>
+            <div>
+                <select name="inputClassState" placeholder="Select" class="form-control" required [(ngModel)]="mandateModel.mandateType">
+                    <option value="0">External</option>
+                    <option value="1">Electronic</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="mandateModel.mandateType ==  0">
+            <label for="inputDateSigned" class="form-label">Date Signed</label>
+
+            <input name="inputDateSigned" [nbDatepicker]="dateSigned" class="form-control" [(ngModel)]="mandateModel.dateSigned" autocomplete="off">
+            <nb-datepicker #dateSigned></nb-datepicker>
+        </div>
+
+        <div class="form-group" *ngIf="mandateModel.mandateType ==  0">
+            <label for="inputDateSigned" class="form-label">Mandate</label>
+
+            <dx-file-uploader name="file"
+                              uploadUrl="https://manage.eqapp.net/eq.api/api/File/UploadChunk"
+                              [uploadHeaders]="uploadHeaders"
+                              accept=".pdf,.doc,.docx"
+                              [chunkSize]="200000"
+                              [maxFileSize]="5000000"
+                              [multiple]="false"
+                              (onUploaded)="onUploaded($event,'fileLink')">
+            </dx-file-uploader>
+        </div>
+        <div class="form-group" *ngIf="mandateModel.mandateType ==  1">
+            <small>Equilibrium will send an email to the member and verify the mandate. Once signed and authenticated the mandate will indicate as signed and will be downloadable.</small>
+        </div>
+        <div class="form-group" *ngIf="bankList.bankList != null && mandateModel.mandateType ==  0">
+            <label for="inputBranchCode" class="form-label">Bank & Branch Code</label>
+            <div>
+                <select name="inputBranchCode" placeholder="Select" class="form-control" required [(ngModel)]="mandateModel.bankData">
+                    <option *ngFor="let bank of bankList.bankList.bank" value="{{bank.bankName}}|{{bank.defaultCode}}">{{bank.bankName}}  ({{bank.defaultCode}})</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="mandateModel.mandateType ==  0">
+            <label for="inputBankAccountType" class="form-label">Account Type</label>
+            <div>
+                <select name="inputBankAccountType" placeholder="Select" class="form-control" required [(ngModel)]="mandateModel.bankAccountType">
+                    <option value="1">Cheque</option>
+                    <option value="2">Savings</option>
+                    <option value="3">Transmission</option>
+                    <option value="4">Bond</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="mandateModel.mandateType ==  0">
+            <label for="inputAccountNumber" class="form-label">Account Number</label>
+            <div class="">
+                <input type="text" name="inputAccountNumber" class="form-control" id="inputAccountNumber" placeholder="Account Number" [(ngModel)]="mandateModel.accountNumber" autocomplete="off" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDebitOrderDay" class="form-label">Debit Order Day</label>
+            <div class="">
+                <input type="number" name="inputDebitOrderDay" class="form-control" id="inputDebitOrderDay" placeholder="Debit Order Day" [(ngModel)]="mandateModel.debitOrderDate" autocomplete="off" required />
+            </div>
+        </div>
+    </div>
+  <div class="modal-footer">
+      <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+      <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+          Save
+      </button>
+  </div>
+</form>

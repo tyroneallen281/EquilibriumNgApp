@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ngx-map-element [lat]="lat" [lng]="lng" [markerSelectEnabled]="false">
+
+  </ngx-map-element>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>

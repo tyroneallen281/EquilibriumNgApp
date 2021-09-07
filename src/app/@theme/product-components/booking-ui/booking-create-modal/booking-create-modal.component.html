@@ -1,0 +1,367 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form  #f="ngForm" (ngSubmit)="onSubmit()">
+<div class="modal-body">
+   
+        <div class="form-group">
+            <label for="inputClassState" class="form-label">State</label>
+            <div>
+                <select name="inputClassState" placeholder="Select" class="form-control" required [(ngModel)]="classModel.classState">
+                    <option value="0">Active</option>
+                    <option value="1">De-Active</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputClassName" class="form-label">Class Name</label>
+            <div>
+                <input type="text" name="inputClassName" class="form-control" id="inputClassName" placeholder="Class Name" [(ngModel)]="classModel.name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription" class="form-label">Description</label>
+            <div>
+                <textarea type="text" name="inputDescription" class="form-control" id="inputDescription" placeholder="Description" [(ngModel)]="classModel.Description" required>
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="facilityId" class="form-label">Facility</label>
+            <ngx-facility-select [(facilityId)]="classModel.facilityId"></ngx-facility-select>
+        </div>
+        <div class="form-group">
+            <label for="staffId" class="form-label">Manage Trainers</label>
+            <ngx-staff-select [(facilityId)]="classModel.facilityId" [(staff)]="classModel.manageTrainers"></ngx-staff-select>
+        </div>
+        <div class="form-group">
+            <label for="staffId" class="form-label">Other Trainers</label>
+            <ngx-staff-select [(facilityId)]="classModel.facilityId" [(staff)]="classModel.otherTrainers"></ngx-staff-select>
+        </div>
+        <div class="form-group">
+            <label for="inputCapacity" class="form-label">Capacity</label>
+            <div>
+                <input type="number" name="inputCapacity" class="form-control" id="inputCapacity" placeholder="Capacity" [(ngModel)]="classModel.capacity" />
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="inputCancellationThreshold" class="form-label">Cancellation Threshold</label>
+            <div class="">
+                <select name="inputCancellationThreshold" placeholder="Select" class="form-control" required [(ngModel)]="classModel.cancellationThreshold">
+                    <option value="0">Before Class</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                    <option value="120">2 Hours</option>
+                    <option value="360">6 Hours</option>
+                    <option value="720">12 Hours</option>
+                    <option value="1440">1 Day</option>
+                    <option value="2880">2 Days</option>
+                    <option value="10080">7 Days</option>
+                    <option value="-1">No Cancellation</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputBookingThreshold" class="form-label">Booking Threshold</label>
+            <div>
+                <select name="inputBookingThreshold" placeholder="Select" class="form-control" required [(ngModel)]="classModel.bookingThreshold">
+                    <option value="0">Before Class</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                    <option value="120">2 Hours</option>
+                    <option value="360">6 Hours</option>
+                    <option value="720">12 Hours</option>
+                    <option value="1440">1 Day</option>
+                    <option value="2880">2 Days</option>
+                    <option value="10080">7 Days</option>
+                    <option value="20160">14 Days</option>
+                    <option value="40320">1 Month</option>
+                </select>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div>
+                <nb-checkbox  name="inputFreeClass"  [(ngModel)]="classModel.freeClass">Free Class</nb-checkbox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <nb-checkbox  name="inputShowCoaches" [(ngModel)]="classModel.showCoaches" >Show Coaches</nb-checkbox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <nb-checkbox  name="inputReminderSend" [(ngModel)]="classModel.autoSendReminder">Send Reminder</nb-checkbox>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="classModel.autoSendReminder">
+            <label for="inputClassName" class="form-label">Send Reminder Before</label>
+            <div>
+                <select name="inputReminderThreshold" placeholder="Select" class="form-control" required [(ngModel)]="classModel.reminderThreshold">
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                    <option value="120">2 Hours</option>
+                    <option value="360">6 Hours</option>
+                    <option value="720">12 Hours</option>
+                    <option value="1440">1 Day</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputClassType" class="form-label">Class Type</label>
+            <div class="">
+                <select name="inputClassType" placeholder="Select" class="form-control" required [(ngModel)]="classModel.classType">
+                    <option value="0">Recurring</option>
+                    <option value="1">Once Off</option>
+
+                </select>
+            </div>
+        </div>
+        <div *ngIf="classModel.classType == 0">
+            <hr/>
+            <h4>Recurring</h4>
+            <div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="inputStartDate" class="col-form-label">Start Date</label>
+                            <input name="startDate" [nbDatepicker]="startDate" class="form-control" [(ngModel)]="classModel.startDateTime">
+                            <nb-datepicker #startDate></nb-datepicker>
+                        </div>
+                        <div class="col-6">
+                            <label for="inputEndDate" class="col-form-label">End Date</label>
+                            <input name="endDate" [nbDatepicker]="endDate" class="form-control" [(ngModel)]="classModel.endDateTime">
+                            <nb-datepicker #endDate></nb-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="inputStartDate" class="col-form-label">Start Time</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <select name="inputStartHour" placeholder="Select" class="form-control" required [(ngModel)]="classModel.startHour">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <select name="inputStartMinute" placeholder="Select" class="form-control" required [(ngModel)]="classModel.startMinute">
+                                        <option value="0">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="inputEndDate" class="col-form-label">End Time</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <select name="inputEndHour" placeholder="Select" class="form-control" required [(ngModel)]="classModel.endHour">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <select name="inputEndMinute" placeholder="Select" class="form-control" required [(ngModel)]="classModel.endMinute">
+                                        <option value="0">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label>Days</label>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <nb-checkbox name="dayMonday" [(ngModel)]="classModel.monday">Monday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="dayTuesday" [(ngModel)]="classModel.tuesday">Tuesday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="dayWednesday" [(ngModel)]="classModel.wednesday">Wednesday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="dayThursday" [(ngModel)]="classModel.thursday">Thursday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="dayFriday" [(ngModel)]="classModel.friday">Friday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="daySaturday" [(ngModel)]="classModel.saturday">Saturday</nb-checkbox>
+                        </div>
+                        <div class="col-4">
+                            <nb-checkbox name="daySunday" [(ngModel)]="classModel.sunday">Sunday</nb-checkbox>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+    <div *ngIf="classModel.classType == 1">
+         <hr/>
+         <h4>Once Off</h4>
+         
+         <div class="form-group">
+             <div class="row">
+                 <div class="col-6">
+                     <label for="inputStartDate" class="col-form-label">Date</label>
+                     <input name="startDate" [nbDatepicker]="startDate" class="form-control" [(ngModel)]="classModel.startDateTime">
+                     <nb-datepicker #startDate></nb-datepicker>
+                 </div>
+               
+             </div>
+         </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputStartDate" class="col-form-label">Start Time</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <select name="inputStartHour" placeholder="Select" class="form-control" required [(ngModel)]="classModel.startHour">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select name="inputStartMinute" placeholder="Select" class="form-control" required [(ngModel)]="classModel.startMinute">
+                                <option value="0">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="inputEndDate" class="col-form-label">End Time</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <select name="inputEndHour" placeholder="Select" class="form-control" required [(ngModel)]="classModel.endHour">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select name="inputEndMinute" placeholder="Select" class="form-control" required [(ngModel)]="classModel.endMinute">
+                                <option value="0">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+  <div class="modal-footer">
+      <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+      <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+          Save
+      </button>
+  </div>
+</form>

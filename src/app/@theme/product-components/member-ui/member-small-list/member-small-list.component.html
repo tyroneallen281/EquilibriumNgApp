@@ -1,0 +1,27 @@
+<dx-list [dataSource]="classListDataSource"
+         
+         itemTemplate="listItem">
+        
+  <div *dxTemplate="let item of 'listItem'">
+
+    <div class="media">
+      <div class="media-body">
+          <h5 class="mt-0">{{item.name}} - Cap({{item.capacity}})</h5>
+          <small>
+              {{item.description}}
+          </small>
+          <br />
+          <small>
+              Period: 
+          </small>
+        <div class="float-right">
+            <small>
+                {{item.daysDisplay}}
+            </small>
+            <button class="btn btn-primary">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</dx-list>

@@ -1,0 +1,82 @@
+<div class="row mb-2">
+  <div class="col-xl-12">
+    <div class="float-left">
+        <h3>{{classEventModel.dateName}}</h3>
+    </div>
+    <div class="float-right">
+
+
+        <button class="btn btn-sm btn-primary" status="primary" (click)="manageClass()">
+            <fa-icon icon="pencil-alt"></fa-icon> Edit
+        </button>
+        <button class="btn btn-sm btn-danger" status="primary" (click)="deleteClass()" *ngIf="!classEventModel.cancelled">
+            <fa-icon icon="trash"></fa-icon> Cancel
+        </button>
+        <button class="btn btn-sm btn-danger" status="primary" (click)="activateClass()" *ngIf="classEventModel.cancelled">
+            Activate
+        </button>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-4">
+        <nb-card>
+            <nb-card-header>
+                <h4>Details</h4>
+            </nb-card-header>
+            <nb-card-body>
+                <div>
+                    Time
+                    <strong>
+                        {{(classEventModel.startDate | date:'shortTime') + ' - ' + (classEventModel.endDate | date:'shortTime')}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Rate
+                    <strong>
+                        {{classEventModel.classRateString}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Main Trainer
+                    <strong>
+                        <a [routerLink]="['/pages/staff/staff-details']" [queryParams]="{id: classEventModel.mainTrainerId}">{{classEventModel.mainTrainer}}</a>
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Bookings
+                    <strong>
+                        {{classEventModel.classBookingsCount}}/{{classEventModel.capacity}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Booking Threshold
+                    <strong>
+                        {{classEventModel.bookingThresholdDateTime | date:'HH:mm dd/MM/yyyy'}}
+                    </strong>
+                </div>
+                <div class="mt-2">
+                    Cancellation Threshold
+                    <strong>
+                        {{classEventModel.cancellationThresholdDateTime | date:'HH:mm dd/MM/yyyy'}}
+                    </strong>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div class="col-xl-8">
+        <nb-card>
+            <nb-card-header>
+                <h4>Bookings</h4>
+            </nb-card-header>
+            <nb-card-body>
+              
+                <ngx-booking-list [classEventId]="id"></ngx-booking-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row mb-2">
+  <div class="col-xl-12">
+    <div  class="float-left">
+      <h3>System User - {{userModel.firstName}} {{userModel.lastName}}</h3>
+    </div>
+    <div class="float-right">
+
+      <button class="btn btn-sm btn-danger" status="danger" (click)="deleteUser()">
+        <fa-icon icon="trash-alt"></fa-icon> Deactivate
+      </button>
+      <button  class="btn btn-sm btn-primary" status="primary" (click)="manageResetPassword()">
+        <fa-icon icon="pencil-alt"></fa-icon> Reset Password
+      </button>
+      <button class="btn btn-sm btn-primary" status="primary" (click)="manageUser()">
+        <fa-icon icon="pencil-alt"></fa-icon> Edit
+      </button>
+     
+      <button class="btn btn-sm btn-primary" status="primary" (click)="manageUserRoles()">
+        <fa-icon icon="lock"></fa-icon> Roles
+      </button>
+
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-xl-12">
+      <nb-card>
+
+        <nb-card-body>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-form-label"><b>Email Address:</b> {{userModel.email}}</label>
+
+          </div>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-form-label"><b>Phone:</b> {{userModel.phoneNumber}}</label>
+
+          </div>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-form-label"><b>ID Number:</b> {{userModel.idNumber}}</label>
+
+          </div>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-form-label"><b>Employee Number:</b> {{userModel.employeeNumber}}</label>
+
+          </div>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-12 col-form-label"><b>Join Date:</b> {{userModel.joinDate | date:'short'}}</label>
+
+          </div>
+        </nb-card-body>
+
+      </nb-card>
+    </div>
+    
+  </div>

@@ -1,0 +1,75 @@
+<!--<dx-list [dataSource]="classListDataSource"
+         itemTemplate="listItem">
+
+    <div *dxTemplate="let item of 'listItem'">
+
+        <div class="media">
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mt-0">{{item.name}} - Cap({{item.capacity}})</h5>
+
+                        <small>
+                            {{item.description | concat:[50]}}
+                        </small>
+                        <br />
+                        <small>
+                            Period: {{item.startDateTimeString}} - {{item.endDateTimeString}}
+                        </small>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="float-right">
+                            <small>
+                                {{item.daysDisplay}}
+                            </small>
+                            <br />
+                          
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</dx-list>-->
+
+
+<dx-data-grid [dataSource]="classListDataSource"
+              [remoteOperations]="true"
+              showBorders="true"
+              showRowLines="true"
+              rowAlternationEnabled="true"
+              (onSelectionChanged)="rowSelected()"
+              [(selectedRowKeys)]="selectedRows"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-export [enabled]="true" fileName="Classes" [allowExportSelectedData]="false"></dxo-export>
+    <dxo-search-panel [visible]="true"
+                      [width]="240"
+                      placeholder="Search..."></dxo-search-panel>
+    <dxi-column dataField="name"></dxi-column>
+    <dxi-column dataField="capacity" [width]="80"></dxi-column>
+    <dxi-column dataField="startDateTimeString" caption="Start Date"></dxi-column>
+    <dxi-column dataField="endDateTimeString" caption="End Date"></dxi-column>
+    <dxi-column dataField="timeString" caption="Time"></dxi-column>
+    <dxi-column dataField="daysDisplay" [width]="140" caption="Class Days"></dxi-column>
+    <dxi-column dataField="classRateString" [width]="120" caption="Rate"></dxi-column>
+    <dxi-column caption="State" [width]="80"cellTemplate="stateTemplate"></dxi-column>
+    <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"
+               [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    <div *dxTemplate="let data of 'actionTemplate'">
+        <a class="btn btn-primary  btn-block float-right" [routerLink]="['/pages/schedule/class-details']" [queryParams]="{id: data.data.classId}">View</a>
+        <button class="btn btn-primary  btn-block float-right" (click)="manageClass(data.data.classId)">Edit</button>
+    </div>
+    <div *dxTemplate="let data of 'stateTemplate'">
+        <strong *ngIf="data.data.classState == 0">
+            Active
+        </strong>
+        <strong *ngIf="data.data.classState == 1">
+            In-Active
+        </strong>
+    </div>
+</dx-data-grid>

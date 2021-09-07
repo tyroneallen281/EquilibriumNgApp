@@ -1,0 +1,11 @@
+<dx-lookup [dataSource]="dataSource"
+           [displayExpr]="getDisplayExpr"
+           placeholder="Select member"
+           itemTemplate="listItem"
+           (onValueChanged)="updateMember($event)">
+    <div *dxTemplate="let item of 'listItem'">
+        <div class="custom-item">
+            <div>{{item.firstName}} {{item.lastName}} ({{item.fullContactNumber}})</div>
+        </div>
+    </div>
+</dx-lookup>

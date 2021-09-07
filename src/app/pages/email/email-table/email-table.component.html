@@ -1,0 +1,43 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Email Templates</h3>
+      </div>
+      <div class="col-6">
+        <div class="float-right">
+            
+             <a class="btn btn-primary" size="small" nbButton status="primary"  [routerLink]="['/pages/email/email-create']">
+                  <img src="https://img.icons8.com/dusk/24/000000/plus-math.png"/> Create Email
+              </a>
+
+        </div>
+      </div>
+    </div>
+</nb-card-header>
+
+  <nb-card-body>
+      <dx-data-grid [dataSource]="emailDataSource"
+                    [remoteOperations]="true"
+                    showBorders="true"
+                    showRowLines="true"
+                    rowAlternationEnabled="true">
+          <dxo-export [enabled]="true" fileName="Email Templates" [allowExportSelectedData]="false"></dxo-export>
+          <dxo-search-panel [visible]="true"
+                            [width]="240"
+                            placeholder="Search..."></dxo-search-panel>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="name" [width]="250"></dxi-column>
+          <dxi-column dataField="subject" [width]="250"></dxi-column>
+          <dxi-column dataField="replyToEmail"></dxi-column>
+           <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true"
+                     [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+          <div *dxTemplate="let data of 'actionTemplate'">
+              <a class="btn btn-primary  btn-block float-right" [routerLink]="['/pages/email/email-details']" [queryParams]="{id: data.data.emailTemplateId}">Edit</a>
+          </div>
+      </dx-data-grid>
+   
+  </nb-card-body>
+</nb-card>

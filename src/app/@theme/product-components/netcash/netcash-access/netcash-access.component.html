@@ -1,0 +1,47 @@
+<div *ngIf="!loggedIn">
+
+    <div style="border-radius: 10px; background-color: #0031d3; padding:10px; margin-bottom:10px;">
+        <img src="https://netcash.co.za/wp-content/uploads/2019/12/netcash-logo.png" style="width:100px" />
+    </div>
+    <div class="col-xl-6 offset-xl-3">
+
+
+        <form #f="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="inputUsername" class="form-label">Username</label>
+                <div class="">
+                    <input type="text" name="inputUsername" class="form-control" id="inputUsername" placeholder="Username" [(ngModel)]="facilityPaymentAccountModel.username" autocomplete="off" required />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="form-label">Password</label>
+                <div>
+                    <input type="password" name="inputPassword" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="facilityPaymentAccountModel.password" autocomplete="off" required />
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label for="inputPin" class="form-label">Pin</label>
+                <div class="">
+                    <input type="password" name="inputPin" class="form-control" id="inputPin" placeholder="Pin" [(ngModel)]="facilityPaymentAccountModel.pin" autocomplete="off" required />
+                </div>
+            </div>
+
+            
+            <div class="modal-footer">
+                <button class="btn btn-primary float-right" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="loggedIn">
+    <div>
+        <button class="btn btn-danger" style="top:5px;right:5px;position:absolute;" (click)="clearAccessAccount()">Clear Account</button>
+        <iframe [src]="accessUrl | safe" style="width:100%; height:850px;">
+        </iframe>
+    </div>
+</div>

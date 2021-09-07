@@ -1,0 +1,33 @@
+
+<nb-card size="medium">
+  <nb-card-header>
+    {{dataobject.title}} 
+  </nb-card-header>
+  <nb-card-body>
+    <div class="progress-info" *ngFor="let item of dataobject.formData">
+      <div class="title">{{ item.title }}</div>
+      <div class="value">{{ item.value | ngxNumberWithCommas }}/{{ item.total | ngxNumberWithCommas }}</div>
+      <nb-progress-bar [value]="item.activeProgress"></nb-progress-bar>
+      <div class="description">
+        <bdi>
+          {{ item.description }}
+        <br/>
+
+        <small *ngIf="item.lastCompletedDate != null">Last Form: {{item.lastCompletedDate | date}}</small>
+        </bdi>
+      
+      </div>
+    </div>
+    <hr/>
+   
+  </nb-card-body>
+  <nb-card-footer *ngIf="dataobject.actions">
+    <nb-actions size="medium" fullWidth>
+      <nb-action *ngFor="let itemAction of dataobject.actions">
+        <a (click)="openLink(itemAction)"><span>{{itemAction.title}}</span></a>
+      </nb-action>
+    </nb-actions>
+    
+  </nb-card-footer>
+</nb-card>
+

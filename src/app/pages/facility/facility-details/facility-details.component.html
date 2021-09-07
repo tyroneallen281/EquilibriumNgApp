@@ -1,0 +1,89 @@
+<div class="row mb-2">
+  <div class="col-xl-12">
+      <div class="float-left">
+          <h3>Facility - {{facilityModel.name}}</h3>
+          <small *ngIf="!facilityModel.published">Only published Facilities will be visible in the Equilibrium App</small>
+      </div>
+      <div class="float-right">
+
+          <button class="btn btn-sm btn-danger" status="danger" (click)="unPublishFacility()" *ngIf="facilityModel.published">
+              Unpublish
+          </button>
+          <button class="btn btn-sm btn-success" status="primary" (click)="publishFacility()" *ngIf="!facilityModel.published">
+              Publish
+          </button>
+          <button class="btn btn-sm btn-primary" status="primary" (click)="manageFacilityContractText()">
+              <fa-icon icon="pencil-alt"></fa-icon> Contract Text
+          </button>
+          <button class="btn btn-sm btn-primary" status="primary" (click)="manageFacility()">
+              <fa-icon icon="pencil-alt"></fa-icon> Edit
+          </button>
+
+      </div>
+  </div>
+</div>
+
+<div class="row">
+       <div class="col-xl-3">
+            <nb-card>
+
+                <nb-card-body>
+                    <div class="form-group" *ngIf="facilityModel.logoPath != null">
+                        <img class="thumbnail mx-auto" height="80" [src]="facilityModel.logoPath" src-fallback="http://app.baobabtech.co.za/BaobabDMapi/api/Apps/Icon?filename=no_icon" />
+
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact" class="col-sm-12 col-form-label"><b>Description:</b> </label>
+                        <p class="col-sm-12">
+                            {{facilityModel.description}}
+                        </p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact" class="col-sm-12 col-form-label"><b>Contact:</b> </label>
+                        <p class="col-sm-12">
+                            {{facilityModel.contact}}
+                        </p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact" class="col-sm-12 col-form-label"><b>Website:</b></label>
+                        <p class="col-sm-12">
+                            <a href="{{facilityModel.website | safe}}" target="_blank">{{facilityModel.website}}</a>
+                        </p>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact" class="col-sm-12 col-form-label"><b>Address:</b> </label>
+                        <p class="col-sm-12">
+                            {{facilityModel.address}}
+                        </p>
+                    </div>
+
+
+                    <ngx-map-element [lat]="facilityModel.latitude" [lng]="facilityModel.longitude" [markerSelectEnabled]="false">
+
+                    </ngx-map-element>
+                </nb-card-body>
+
+            </nb-card>
+    </div>
+  <div class="col-xl-9">
+    <nb-card>
+      <nb-card-body>
+          <nb-tabset>
+
+
+              <nb-tab tabTitle="NetCash Access">
+                  <ngx-netcash-access [facilityId]="id"></ngx-netcash-access>
+              </nb-tab>
+
+              <nb-tab tabTitle="NetCash Integration" [badgeText]="netCahsIntegrationText" [badgeStatus]="netCahsIntegrationStatus">
+                  <ngx-netcash-integration [facilityId]="id" (statusEvent)="integrationUpdate($event)"></ngx-netcash-integration>
+              </nb-tab>
+              <nb-tab tabTitle="Auto Emailers">
+                  <ngx-facility-auto-email-list [facilityId]="id"></ngx-facility-auto-email-list>
+              </nb-tab>
+
+          </nb-tabset>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(0)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form  #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <label for="inputTemperature" class="form-label">Temperature(C)</label>
+            <div>
+                <input type="number" name="inputTemperature" class="form-control" id="inputTemperature" placeholder="Temperature" [(ngModel)]="questionnaire.q1" required/>
+                <small class="badge badge-warning" *ngIf="questionnaire.q1 > 38">Warning: High temperature</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ2" class="form-label">Do you have a new and persistent cough?</label>
+            <div>
+                <select name="inputQ2" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q2">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q2 == 1">Warning</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ3" class="form-label">Do you have a shortness of breath or have any difficulty breahting?</label>
+            <div>
+                <select name="inputQ3" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q3">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q3 == 1">Warning</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ4" class="form-label">Do you have a fever?</label>
+            <div>
+                <select name="inputQ4" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q4">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q4 == 1">Warning</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ5" class="form-label">Have you been in contact with anyone in the last 14 days who is experiencing any of the above symptoms?</label>
+            <div>
+                <select name="inputQ5" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q5">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q5 == 1">Warning</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ6" class="form-label">Have you been in contact with anyone who tested positive for COVID-19?</label>
+            <div>
+                <select name="inputQ6" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q6">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q6 == 1">Warning</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputQ7" class="form-label">Have you travelled abroad in the last 1-2 months?</label>
+            <div>
+                <select name="inputQ7" placeholder="Select" class="form-control" required [(ngModel)]="questionnaire.q7">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <small class="badge badge-warning" *ngIf="questionnaire.q7 == 1">Warning</small>
+            </div>
+        </div>
+    </div>
+  <div class="modal-footer">
+      <button class="btn btn-secondary" nbButton (click)="activeModal.close(0)">Close</button>
+      <button class="btn btn-primary" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+          Save
+      </button>
+  </div>
+</form>

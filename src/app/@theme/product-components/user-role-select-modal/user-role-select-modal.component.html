@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select User Roles</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <dx-tree-list #treeList id="tasks"
+                [dataSource]="tasks"
+                keyExpr="name"
+                [showRowLines]="true"
+                [showBorders]="true"
+                [columnAutoWidth]="true"
+                [(selectedRowKeys)]="selectedRowKeys">
+    <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
+    <dxo-selection mode="multiple"
+                   [recursive]="recursiveSelectionEnabled">
+    </dxo-selection>
+    <dxi-column dataField="name" caption="Role"></dxi-column>
+
+  </dx-tree-list>
+
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+  <button  class="btn btn-primary" status="primary" (click)="formSubmit()">
+    Save
+  </button>
+</div>

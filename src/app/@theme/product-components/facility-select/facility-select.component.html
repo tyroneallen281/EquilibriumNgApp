@@ -1,0 +1,17 @@
+
+    
+            <dx-select-box [dataSource]="facilityModels"
+                           displayExpr="name"
+                           valueExpr="facilityId"
+                           [(ngModel)]="facilityId"
+                           itemTemplate="item"
+                           (ngModelChange)="updateFacility()">
+                <div *dxTemplate="let data of 'item'">
+                    <img  class="mr-3 thumbnail" alt="image" width="40" src="{{data.logoPath}}" src-fallback="http://app.baobabtech.co.za/BaobabDMapi/api/Apps/Icon?filename=no_icon" />
+                    <div style="display:inline-block">
+                        <p>{{data.name}}</p> 
+                      
+                    </div>
+                </div>
+            </dx-select-box>
+      

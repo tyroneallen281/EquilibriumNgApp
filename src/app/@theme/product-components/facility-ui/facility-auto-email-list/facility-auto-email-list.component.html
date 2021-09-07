@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="float-right">
+            <button class="btn btn-sm btn-primary" status="primary" (click)="manageAutoEmailer()">
+                <fa-icon icon="plus"></fa-icon> Add Auto Emailer
+            </button>
+
+        </div>
+    </div>
+</div>
+<dx-list [dataSource]="autoEmailDataSource"
+         itemTemplate="listItem">
+
+    <div *dxTemplate="let item of 'listItem'">
+
+        <div class="media">
+            <div class="media-body">
+                <h5 class="mt-0">{{item.emailTypeString}}</h5>
+                <small>
+                    Template: {{item.emailTemplate.name}}
+                </small>
+                <br />
+
+                <div class="float-right">
+
+                    <button class="btn btn-danger"  (click)="deleteAutoEmailer(item.facilityAutoEmailId)">Delete</button>
+                    <!--<button class="btn btn-primary"  (click)="manageAutoEmailer(item.facilityAutoEmailId)">Manage</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</dx-list>
+

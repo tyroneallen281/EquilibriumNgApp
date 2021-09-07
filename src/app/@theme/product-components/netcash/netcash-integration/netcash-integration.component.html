@@ -1,0 +1,63 @@
+
+    <div style="border-radius: 10px; background-color: #0031d3; padding:10px; margin-bottom:10px;">
+        <img src="https://netcash.co.za/wp-content/uploads/2019/12/netcash-logo.png" style="width:100px" />
+    </div>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <div class="row">
+                <label for="inputFirstName" class="col-sm-2 col-form-label">Account Number</label>
+                <div class="col-sm-10">
+                    <input type="text" name="inputAccountNumber" class="form-control" id="inputAccountNumber" placeholder="Account Number" [(ngModel)]="facilityPaymentAccountKeysModel.accountNumber" autocomplete="off" required />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="inputLastName" class="col-sm-2 col-form-label">Account Service Key</label>
+                <div class="col-sm-10">
+                    <input type="text" name="inputAccountServiceKey" class="form-control" id="inputAccountServiceKey" placeholder="Account Service Key" [(ngModel)]="facilityPaymentAccountKeysModel.accountServiceKey" autocomplete="off"  />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="inputLastName" class="col-sm-2 col-form-label">Debit Order Service Key</label>
+                <div class="col-sm-10">
+                    <input type="text" name="inputdebitOrderServiceKey" class="form-control" id="inputdebitOrderServiceKey" placeholder="Debit Order Service Key" [(ngModel)]="facilityPaymentAccountKeysModel.debitOrderServiceKey" autocomplete="off"  />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="inputLastName" class="col-sm-2 col-form-label">Pay Now Service Key</label>
+                <div class="col-sm-10">
+                    <input type="text" name="inputpayNowServiceKey" class="form-control" id="inputpayNowServiceKey" placeholder="PayNow Service Key" [(ngModel)]="facilityPaymentAccountKeysModel.payNowServiceKey" autocomplete="off"  />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="inputLastName" class="col-sm-2 col-form-label">PCI Vault Service Key</label>
+                <div class="col-sm-10">
+                    <input type="text" name="inputvaultServiceKey" class="form-control" id="inputvaultServiceKey" placeholder="PCI Vault Service Key" [(ngModel)]="facilityPaymentAccountKeysModel.vaultServiceKey" autocomplete="off" />
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!validationResult.listResult">
+            <div *ngFor="let error of validationResult.data">
+                <div class="alert alert-danger" *ngIf="!error.result">
+                    {{error.resultMessage}}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="alert alert-success" *ngIf="validationResult.listResult">
+            Active and Valid
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary float-right" nbButton status="primary" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+                Save
+            </button>
+        </div>
+    </form>

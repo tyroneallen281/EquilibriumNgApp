@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Calendar</h3>
+      </div>
+      <div class="col-6">
+          <div class="float-right">
+              <button class="btn btn-primary" size="small" type="button" nbButton status="primary" (click)="createClass()">
+                  <img src="https://img.icons8.com/dusk/24/000000/plus-math.png"> Create Class
+              </button>
+
+
+          </div>
+          <div class="float-right" style="width:160px">
+              <ngx-staff-single-select [(facilityId)]="facilityId" [(staffId)]="staffId"></ngx-staff-single-select>
+            
+          </div>
+
+      </div>
+    </div>
+</nb-card-header>
+
+  <nb-card-body>
+      <ngx-calendar-element [facilityId]="facilityId"  [trainerId]="staffId"></ngx-calendar-element>
+  </nb-card-body>
+</nb-card>

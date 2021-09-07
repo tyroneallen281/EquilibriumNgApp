@@ -1,0 +1,56 @@
+
+<div class="row">
+    <div class="col-xl-12">
+        <form #f="ngForm" (ngSubmit)="onSubmit()">
+            <nb-card>
+
+                <nb-card-header>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>Email Template</h3>
+                        </div>
+                        <div class="col-6">
+                            <div class="float-right">
+                                <button class="btn btn-primary" size="small" type="submit" [disabled]="f.invalid" [promiseBtn]="submitPromise">
+                                    Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body style="min-height:500px">
+
+                    <div class=" row">
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <label for="inputName" class="form-label">Name</label>
+                                <input type="text" name="inputName" class="form-control" id="inputName" placeholder="Name" [(ngModel)]="emailModel.name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="inputReplyToEmail" class="form-label">Reply to email</label>
+                                <input type="text" name="inputReplyToEmail" class="form-control" id="inputReplyToEmail" placeholder="Reply to email" [(ngModel)]="emailModel.replyToEmail" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSubject" class="form-label">Subject</label>
+                                <input type="text" name="inputSubject" class="form-control" id="inputSubject" placeholder="Subject" [(ngModel)]="emailModel.subject" required />
+                            </div>
+
+                        </div>
+                        <div class="col-xl-8">
+                            <quill-editor name="inputEmailHTML" [(ngModel)]="emailModel.emailHTML" required>
+                            </quill-editor>
+
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </nb-card-body>
+
+            </nb-card>
+        </form>
+    </div>
+</div>

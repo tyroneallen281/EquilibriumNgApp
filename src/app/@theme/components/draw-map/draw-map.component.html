@@ -1,0 +1,10 @@
+
+<div leaflet
+     leafletDraw
+     [leafletOptions]="options"
+     [(leafletCenter)]="mapLatLng"
+     [leafletDrawOptions]="drawOptions"
+     (leafletMapReady)="onMapReady($event)"
+    (leafletDrawCreated)="OnDrawCreated($event)">
+
+</div>

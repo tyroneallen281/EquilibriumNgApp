@@ -1,0 +1,31 @@
+
+<dx-data-grid [dataSource]="dataSource"
+              [remoteOperations]="true"
+              showBorders="true"
+              showRowLines="true"
+              rowAlternationEnabled="true"
+              [(selectedRowKeys)]="selectedRows"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxo-export [enabled]="true" fileName="Bookings" [allowExportSelectedData]="false"></dxo-export>
+    <dxo-search-panel [visible]="true"
+                      [width]="240"
+                      placeholder="Search..."></dxo-search-panel>
+    <dxi-column dataField="mandateStateString" caption="Status" [width]="100"></dxi-column>
+    <dxi-column dataField="mandateTypeString" caption="Type" [width]="100"></dxi-column>
+    <dxi-column dataField="memberName"></dxi-column>
+    <dxi-column dataField="bank" [width]="140"></dxi-column>
+    <dxi-column dataField="branchCode" [width]="100"></dxi-column>
+    <dxi-column dataField="bankAccountTypeString" caption="Account Type" [width]="100"></dxi-column>
+    <dxi-column dataField="accountNumber" [width]="100"></dxi-column>
+    <dxi-column dataField="dateSigned" dataType="date" [width]="100"></dxi-column>
+    <dxi-column caption="Actions" [allowSorting]="false" [width]="100" cellTemplate="actionTemplate"></dxi-column>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true"
+               [allowedPageSizes]="[10, 20, 50]"></dxo-pager>
+    <div *dxTemplate="let data of 'actionTemplate'">
+        <a class="btn btn-primary  btn-block float-right" *ngIf="data.data.fileLink != null" href="{{data.data.fullFileLink}}">Download</a>
+        <button class="btn btn-primary  btn-block float-right" *ngIf="data.data.mandateType == 1 && data.data.mandateState == 0" (click)="resendMandate(data.data.mandateId)">Resend</button>
+
+    </div>
+</dx-data-grid>
+
